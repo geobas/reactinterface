@@ -18,7 +18,7 @@ var MainInterface = React.createClass({
   }, //getInitialState
 
   componentDidMount: function() {
-    this.serverRequest = $.get('./js/data.json', function(result) {
+    this.serverRequest = $.get('./assets/data.json', function(result) {
       var tempApts = result;
       this.setState({
         myAppointments: tempApts
@@ -71,7 +71,7 @@ var MainInterface = React.createClass({
     var orderBy = this.state.orderBy;
     var orderDir = this.state.orderDir;
     var queryText = this.state.queryText;
-    var myAppointments = this.state.myAppointments; 
+    var myAppointments = this.state.myAppointments;
 
     myAppointments.forEach(function(item) {
       if(
