@@ -1,30 +1,35 @@
-var React = require('react');
+import React,{Component} from 'react';
 
-var AptList = React.createClass({
+export default class MainInterface extends Component {
 
-  handleDelete: function() {
-    this.props.onDelete(this.props.whichItem)
-  },
+	constructor(props) {
+		super(props);
+		this.handleDelete = this.handleDelete.bind(this);
+	}
 
-  render: function() {
-    return(
-      <li className="pet-item media">
-        <div className="media-left">
-          <button className="pet-delete btn btn-xs btn-danger" onClick={this.handleDelete}>
-          <span className="glyphicon glyphicon-remove"></span></button>
-        </div>
-        <div className="pet-info media-body">
-          <div className="pet-head">
-            <span className="pet-name">{this.props.singleItem.petName}</span>
-            <span className="apt-date pull-right">{this.props.singleItem.aptDate}</span>
-          </div>
-          <div className="owner-name"><span className="label-item">Owner:</span>
-          {this.props.singleItem.ownerName}</div>
-          <div className="apt-notes">{this.props.singleItem.aptNotes}</div>
-        </div>
-      </li>
-    ) // return
-  } // render
-}); //AptList
+	handleDelete() {
+		this.props.onDelete(this.props.whichItem);
+	}
 
-module.exports = AptList;
+	render() {
+		return (
+			<li className="pet-item media">
+			    <div className="media-left">
+			        <button className="pet-delete btn btn-xs btn-danger" onClick={ this.handleDelete }>
+			            <span className="glyphicon glyphicon-remove"></span>
+			        </button>
+			    </div>
+			    <div className="pet-info media-body">
+			        <div className="pet-head">
+			            <span className="pet-name">{ this.props.singleItem.petName }</span>
+			            <span className="apt-date pull-right">{ this.props.singleItem.aptDate }</span>
+			        </div>
+			        <div className="owner-name"><span className="label-item">Owner:</span> { this.props.singleItem.ownerName }
+			        </div>
+			        <div className="apt-notes">{ this.props.singleItem.aptNotes }</div>
+			    </div>
+			</li>
+		)
+	}
+
+}

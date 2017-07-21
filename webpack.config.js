@@ -2,6 +2,7 @@ const path = require('path');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 
 module.exports = {
+
 	entry: path.resolve(__dirname, './src/js'),
 
 	output: {
@@ -22,13 +23,21 @@ module.exports = {
 
 	module: {
 		loaders: [
-		{
-			test: /\.js$/,
-			exclude: /node_modules/,
-			loader: 'babel',
-			query: {
-				presets: ['react']
-			}
-		}]
+			{
+				test: /\.js$/,
+				exclude: /node_modules/,
+				loader: 'babel',
+				include: __dirname,
+				query: {
+					presets: ['es2015', 'react', 'stage-0']
+				}
+			},
+            // {
+            //     test: /\.json$/,
+            //     exclude: /(node_modules)/,
+            //     loader: 'json-loader'
+            // },
+		]
 	}
+
 }
