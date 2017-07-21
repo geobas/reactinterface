@@ -1,5 +1,5 @@
 # Building an Interface with React
-This is the repository for the course, [Building an Interface with React](https://www.lynda.com/React-js-tutorials/Building-Web-Interface-React-js/495271-2.html).
+This is the repository for the course, [Building an Interface with React](https://www.lynda.com/React-js-tutorials/Building-Web-Interface-React-js/495271-2.html).  
 The code is converted from ES5 to ES6 and gulp is replaced with webpack.
 
 ## Instructions
