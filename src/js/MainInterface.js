@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import _ from 'lodash';
 
 import AptList from './AptList';
+import ErrorMessage from './ErrorMessage';
 import AddAppointment from './AddAppointment';
 import SearchAppointments from './SearchAppointments';
 
@@ -14,11 +15,14 @@ export default class MainInterface extends Component {
 			orderBy: 'petName',
 			orderDir: 'asc',
 			queryText: '',
-			myAppointments: []
+			myAppointments: [],
+			errorMsg: [],
+			errorMsgVisible: false
 		};
 		this.deleteMessage = this.deleteMessage.bind(this);
 		this.toggleAddDisplay = this.toggleAddDisplay.bind(this);
 		this.addItem = this.addItem.bind(this);
+		this.addError = this.addError.bind(this);
 		this.reOrder = this.reOrder.bind(this);
 		this.setQueryText = this.setQueryText.bind(this);
 		this.showAppointments = this.showAppointments.bind(this);
@@ -46,6 +50,11 @@ export default class MainInterface extends Component {
 		let tempApts = this.state.myAppointments;
 		tempApts.push(tempItem);
 		this.setState({ myAppointments: tempApts });
+	}
+
+	addError(errorItems, visible) {
+		this.setState({ errorMsg: errorItems });
+		this.setState({ errorMsgVisible: visible });
 	}
 
 	reOrder(orderBy, orderDir) {
@@ -87,15 +96,17 @@ export default class MainInterface extends Component {
 	}
 
 	render() {
-
-		let filteredApts = this.showAppointments();
-
 		return (
 			<div className="interface">
+				<ErrorMessage
+					errors = { this.state.errorMsg }
+					errorsVisible = { this.state.errorMsgVisible }
+				/>
 				<AddAppointment
 					bodyVisible = { this.state.aptBodyVisible }
 					handleToggle = { this.toggleAddDisplay }
 					addApt = { this.addItem }
+					addErrorMsg = { this.addError }
 				/>
 				<SearchAppointments
 					orderBy = { this.state.orderBy }
@@ -103,7 +114,7 @@ export default class MainInterface extends Component {
 					onReOrder = { this.reOrder }
 					onSearch = { this.setQueryText }
 				/>
-				<ul className="item-list media-list">{ filteredApts }</ul>
+				<ul className="item-list media-list">{ this.showAppointments() }</ul>
 			</div>
 		)
 	}

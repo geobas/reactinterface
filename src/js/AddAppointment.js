@@ -23,14 +23,29 @@ export default class AddAppointment extends Component {
 	}
 
 	handleAdd(e) {
-		let tempItem = {
-				petName: this.refs.inputPetName.value,
-				ownerName: this.refs.inputOwnerName.value,
-				aptDate: this.refs.inputAptDate.value + ' ' + this.refs.inputAptTime.value,
-				aptNotes: this.refs.inputAptNotes.value
-			};
-		e.preventDefault();
-		this.props.addApt(tempItem);
+		let errorMsg = [];
+
+		let petName = this.refs.inputPetName.value;
+		if ( petName.length < 5 ) errorMsg.push({ petName : 'Pet name is too short...' });
+
+		let ownerName = this.refs.inputOwnerName.value;
+		if ( ownerName.length < 5 ) errorMsg.push({ ownerName : 'Owner name is too short...' });
+
+		if ( errorMsg.length > 0) {
+			this.props.addErrorMsg(errorMsg, true);
+			e.preventDefault();
+		} else {
+			let tempItem = {
+					petName,
+					ownerName,
+					aptDate: this.refs.inputAptDate.value + ' ' + this.refs.inputAptTime.value,
+					aptNotes: this.refs.inputAptNotes.value
+				};
+			e.preventDefault();
+			this.props.addApt(tempItem);
+			this.props.addErrorMsg(errorMsg, false);
+			this.refs.appointmentForm.reset();
+		}
 	}
 
 	render() {
@@ -40,7 +55,7 @@ export default class AddAppointment extends Component {
 			    	<span className="glyphicon glyphicon-plus"></span> Add Appointment
 			    </div>
 			    <div className="panel-body" style={ this.displayAptBody }>
-			        <form className="add-appointment form-horizontal" onSubmit={ this.handleAdd }>
+			        <form className="add-appointment form-horizontal" ref="appointmentForm" onSubmit={ this.handleAdd }>
 			            <div className="form-group">
 			                <label className="col-sm-2 control-label" htmlFor="petName">Pet Name</label>
 			                <div className="col-sm-10">
