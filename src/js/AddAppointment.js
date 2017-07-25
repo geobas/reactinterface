@@ -25,11 +25,17 @@ export default class AddAppointment extends Component {
 	handleAdd(e) {
 		let errorMsg = [];
 
-		let petName = this.refs.inputPetName.value;
+		const petName = this.refs.inputPetName.value;
 		if ( petName.length < 5 ) errorMsg.push({ petName : 'Pet name is too short...' });
 
-		let ownerName = this.refs.inputOwnerName.value;
+		const ownerName = this.refs.inputOwnerName.value;
 		if ( ownerName.length < 5 ) errorMsg.push({ ownerName : 'Owner name is too short...' });
+
+		const aptDate = this.refs.inputAptDate.value;
+		if ( !aptDate ) errorMsg.push({ inputAptDate : 'Date was not given...' });
+
+		const aptTime = this.refs.inputAptTime.value;
+		if ( !aptTime ) errorMsg.push({ aptTime : 'Time was not given...' });
 
 		if ( errorMsg.length > 0) {
 			this.props.addErrorMsg(errorMsg, true);
@@ -38,7 +44,7 @@ export default class AddAppointment extends Component {
 			let tempItem = {
 					petName,
 					ownerName,
-					aptDate: this.refs.inputAptDate.value + ' ' + this.refs.inputAptTime.value,
+					aptDate: aptDate + ' ' + aptTime,
 					aptNotes: this.refs.inputAptNotes.value
 				};
 			e.preventDefault();

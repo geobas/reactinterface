@@ -23,8 +23,7 @@ export default class ErrorMessage extends Component {
 
 	render() {
 		return (
-			<div className="alert alert-warning alert-dismissible" role="alert" style={ this.displayErrors }>
-			    <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<div className="alert alert-warning" role="alert" style={ this.displayErrors }>
 			    { this.props.errors.map(this.showErrors) }
 			</div>
 		)
