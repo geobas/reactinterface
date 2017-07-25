@@ -1,5 +1,5 @@
 # Building an Interface with React
-This is the repository for the course, [Building an Interface with React](https://www.lynda.com/React-js-tutorials/Building-Web-Interface-React-js/495271-2.html).  
+This is the repository for the course, [Building an Interface with React](https://www.lynda.com/React-js-tutorials/Building-Web-Interface-React-js/495271-2.html).
 The code is converted from ES5 to ES6 and gulp is replaced with webpack.
 
 ## Instructions
@@ -9,8 +9,10 @@ This repository has branches for each of the videos in the course. You can use t
 	- [node.js](http://nodejs.org/)
 	- [git](http://git-scm.com/)
 	- [webpack](http://webpack.js.org/)
+	- [karma](http://karma-runner.github.io/)
 2. Clone this repository into your local machine using the terminal (mac) or Gitbash (PC) `> git clone https://github.com/geobas/reactinterface`
 3. CD to the folder `cd reactinterface`
 4. Run `> npm install` to install the project dependencies
 5. Run `> npm start` command to start webpack-dev-server
-6. Build something awesome
+6. Run `> npm test` command to start Karma
+7. Build something awesome
