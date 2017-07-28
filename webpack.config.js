@@ -38,6 +38,14 @@ module.exports = {
             //     loader: 'json-loader'
             // },
 		]
+	},
+
+	// required by enzyme
+	externals: {
+		'react/addons': true,
+		'react/lib/ExecutionEnvironment': true,
+		'react/lib/ReactContext': true,
+		'react-addons-test-utils': 'react-dom',
 	}
 
 }
