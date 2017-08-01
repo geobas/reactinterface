@@ -19,7 +19,11 @@ module.exports = {
 	},
 
 	plugins: [
-		new OpenBrowserPlugin({ url: 'http://localhost:3000' })
+		new OpenBrowserPlugin({ url: 'http://localhost:3000' }),
+		new webpack.ProvidePlugin({
+			$: "jquery",
+			jQuery: "jquery"
+		})
 	],
 
 	module: {
@@ -33,11 +37,11 @@ module.exports = {
 					presets: ['es2015', 'react', 'stage-0']
 				}
 			},
-            // {
-            //     test: /\.json$/,
-            //     exclude: /(node_modules)/,
-            //     loader: 'json-loader'
-            // },
+			// {
+			//     test: /\.json$/,
+			//     exclude: /(node_modules)/,
+			//     loader: 'json-loader'
+			// },
 		]
 	},
 
@@ -47,13 +51,6 @@ module.exports = {
 		'react/lib/ExecutionEnvironment': true,
 		'react/lib/ReactContext': true,
 		'react-addons-test-utils': 'react-dom',
-	},
-
-	plugins: [
-		new webpack.ProvidePlugin({
-			$: "jquery",
-			jQuery: "jquery"
-	   })
-	]
+	}
 
 }
