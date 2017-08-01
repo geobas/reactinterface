@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import AptList from '../js/AptList.js';
 import ReactTestUtils from 'react-dom/test-utils';
 import chai, { expect } from 'chai';
-import spies from 'chai-spies';
-chai.use(spies);
+import sinon from 'sinon';
+import sinonChai from 'sinon-chai';
+chai.use(sinonChai);
 import { shallow, mount, render } from 'enzyme';
 
 /* chai-enzyme imports */
@@ -28,10 +29,15 @@ describe('AptList', function () {
 	});
 
 	it('shows a single appointment', function () {
+
+		let itemReturned;
+		const getItemToDelete = item => { itemReturned = item; }
+
 		const aptList = ReactTestUtils.renderIntoDocument(
 			<AptList
 				singleItem = { { petName: "Buffy", ownerName: "Hassum Harrod", aptDate: "2016-06-20 15:30", aptNotes: "This Chihuahua has not eaten for three days and is lethargic" } }
 				whichItem = { { petName: "Buffy", ownerName: "Hassum Harrod", aptDate: "2016-06-20 15:30", aptNotes: "This Chihuahua has not eaten for three days and is lethargic" } }
+				onDelete = { getItemToDelete }
 			/>
 		);
 
@@ -39,37 +45,35 @@ describe('AptList', function () {
 		expect(aptList).to.be.instanceOf(AptList);
 		const singleItem = aptList.props.singleItem;
 		expect(singleItem).to.not.be.undefined;
-		expect(singleItem).to.have.property('petName': 'Buffy');
+		expect(singleItem).to.have.property('petName');
 		expect(singleItem).to.have.property('ownerName').that.is.a('String');
 		expect(singleItem).to.have.property('aptDate').that.is.a('String');
 		const whichItem = aptList.props.whichItem;
 		expect(whichItem).to.not.be.undefined;
-		expect(whichItem).to.have.property('ownerName': 'Hassum Harrod');
+		expect(whichItem).to.have.property('ownerName').equal('Hassum Harrod');
 
-		// const spy = chai.spy(aptList);
-
-		// const btn = ReactTestUtils.findRenderedDOMComponentWithClass(
-  //           aptList, 'pet-delete'
-  //       );
-  //       ReactTestUtils.Simulate.click(btn);
-
-
-
+		const btn = ReactTestUtils.findRenderedDOMComponentWithClass(
+			aptList, 'pet-delete'
+		);
+		ReactTestUtils.Simulate.click(btn);
+		expect(singleItem).to.have.property('petName').to.equal('Buffy');
+		expect(itemReturned).to.have.property('petName').that.is.a('String');
 
 		// Chai.js assertions for enzyme
+		const deleteItem = sinon.stub();
 		const wrapper = mount(
 			<AptList
 				singleItem = { { petName: "Buffy", ownerName: "Hassum Harrod", aptDate: "2016-06-20 15:30", aptNotes: "This Chihuahua has not eaten for three days and is lethargic" } }
 				whichItem = { { petName: "Buffy", ownerName: "Hassum Harrod", aptDate: "2016-06-20 15:30", aptNotes: "This Chihuahua has not eaten for three days and is lethargic" } }
-				onDelete = { callback }
+				onDelete = { deleteItem }
 			/>
 		);
-		const callback = chai.spy(wrapper, 'handleDelete');
+
 		expect(wrapper.find('.pet-name').text()).to.equal('Buffy');
 		expect(wrapper.find('.apt-notes').text()).to.equal('This Chihuahua has not eaten for three days and is lethargic');
-		wrapper.find('.pet-delete').get(0).click();
-		// expect(callback).to.have.been.called().with({ petName: "Buffy", ownerName: "Hassum Harrod", aptDate: "2016-06-20 15:30", aptNotes: "This Chihuahua has not eaten for three days and is lethargic" });
-
+		wrapper.find('.pet-delete').simulate('click');
+		expect(deleteItem).to.have.been.calledOnce;
+		expect(deleteItem).to.have.been.calledWith({ petName: "Buffy", ownerName: "Hassum Harrod", aptDate: "2016-06-20 15:30", aptNotes: "This Chihuahua has not eaten for three days and is lethargic" });
 	});
 
 });

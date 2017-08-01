@@ -1,5 +1,6 @@
 const path = require('path');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
 
@@ -46,6 +47,13 @@ module.exports = {
 		'react/lib/ExecutionEnvironment': true,
 		'react/lib/ReactContext': true,
 		'react-addons-test-utils': 'react-dom',
-	}
+	},
+
+	plugins: [
+		new webpack.ProvidePlugin({
+			$: "jquery",
+			jQuery: "jquery"
+	   })
+	]
 
 }
