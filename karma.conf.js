@@ -1,4 +1,5 @@
 var webpackConfig = require('./webpack.config.js');
+process.env.PHANTOMJS_BIN = './node_modules/.bin/phantomjs';
 
 module.exports = function(config) {
 
@@ -6,10 +7,11 @@ module.exports = function(config) {
 
 		basePath: '',
 
-		frameworks: ['mocha'],
+		frameworks: ['mocha', 'es6-shim'],
 
 		files: [
-			'src/tests/*.js'
+			'src/tests/*.js',
+			'node_modules/es6-shim/es6-shim.js'
 		],
 
 		preprocessors: {
@@ -43,7 +45,7 @@ module.exports = function(config) {
 
 		autoWatch: true,
 
-		// browsers: ['Chrome', 'Firefox'],
+		browsers: ['PhantomJS'],
 
 		singleRun: false,
 
