@@ -38,7 +38,7 @@ describe('ErrorMessage', function () {
 		expect(errors).to.not.be.undefined;
 		expect(errors.length).to.equal(2, 'errors length fault');
 		expect(errors[1]).to.have.property('error2': 'dummy2');
-		expect(Object.values(errors[1])[0]).to.equal('dummy2');
+		expect(errors[1]['error2']).to.equal('dummy2');
 		expect(errorMessage.props.errorsVisible).to.not.be.undefined;
 		expect(errorMessage.props.errorsVisible).to.equal(true, 'errors div tag should be visible');
 
