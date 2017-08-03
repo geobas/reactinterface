@@ -44,6 +44,7 @@ describe('AddAppointment', function () {
 			/>
 		);
 
+		expect(wrapper.prop('bodyVisible')).to.be.false;
 		expect(wrapper.find('.panel-body')).to.have.style('display', 'none');
 		wrapper.find('.apt-addheading').simulate('click');
 		expect(handleToggle).to.have.been.calledOnce;

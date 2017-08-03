@@ -27,7 +27,7 @@ describe('SearchAppointments', function () {
 		expect(searchAppointments.props.onReOrder).to.equal(null);
 		expect(searchAppointments.props.onSearch).to.equal(null);
 	});
-
+	
 	it('it filters appointments', function () {
 
 		let orderByReturned, orderDirReturned, termReturned;
@@ -47,7 +47,7 @@ describe('SearchAppointments', function () {
 		expect(searchAppointments).to.be.instanceOf(SearchAppointments);
 		expect(searchAppointments.props.orderBy).to.not.be.undefined;
 		expect(searchAppointments.props.orderBy).to.equal('petName');
-		expect(searchAppointments.props.orderDir).to.not.be.undefined;
+		expect(searchAppointments.props.orderDir).to.not.be.undefined;	
 		expect(searchAppointments.props.orderDir).to.equal('asc');
 
 		// test
@@ -64,7 +64,7 @@ describe('SearchAppointments', function () {
 		);
 		ReactTestUtils.Simulate.click(anchor);
 		expect(orderByReturned).to.equal('ownerName');
-		expect(orderDirReturned).to.equal('asc');
+		expect(orderDirReturned).to.equal('asc');        
 
 		// another one
 		anchor = ReactTestUtils.findRenderedDOMComponentWithClass(
@@ -100,6 +100,6 @@ describe('SearchAppointments', function () {
 		wrapper.find('.SearchApts').simulate('change');
 		expect(termReturned).to.equal('');
 
-	});
+	});	
 
 });

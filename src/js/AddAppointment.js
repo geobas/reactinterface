@@ -93,7 +93,7 @@ export default class AddAppointment extends Component {
 			            </div>
 			            <div className="form-group">
 			                <div className="col-sm-offset-2 col-sm-10">
-			                    <button type="submit" className="btn btn-primary pull-right">Add Appointment</button>
+			                    <button type="submit" className="btn btn-primary pull-right btn-add-appointment">Add Appointment</button>
 			                </div>
 			            </div>
 			        </form>

@@ -47,7 +47,11 @@ module.exports = function(config) {
 
 		singleRun: false,
 
-		concurrency: Infinity
+		concurrency: Infinity,
+
+        proxies: {
+			'/assets/data.json': 'http://www.example.com',
+        }
 	})
 
 }
