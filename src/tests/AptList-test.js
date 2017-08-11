@@ -60,7 +60,7 @@ describe('AptList', function () {
 		expect(itemReturned).to.have.property('petName').that.is.a('String');
 
 		// Chai.js assertions for enzyme
-		const deleteItem = sinon.stub();
+		const deleteItem = sinon.spy();
 		const wrapper = mount(
 			<AptList
 				singleItem = { { petName: "Buffy", ownerName: "Hassum Harrod", aptDate: "2016-06-20 15:30", aptNotes: "This Chihuahua has not eaten for three days and is lethargic" } }

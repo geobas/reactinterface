@@ -12,6 +12,8 @@ chai.use(chaiEnzyme());
 
 describe('MainInterface', function () {
 
+	// this.timeout(20);
+
 	let wrapper;
 
 	beforeEach(function() {
@@ -48,6 +50,7 @@ describe('MainInterface', function () {
 	it('loads without error', function () {
 
 		expect(wrapper.find('.interface').exists()).to.be.true;
+		expect(wrapper.getNode()).to.be.an.instanceof(MainInterface);
 	});
 
 	it('shows appointments', function () {

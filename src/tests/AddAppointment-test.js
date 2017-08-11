@@ -31,9 +31,9 @@ describe('AddAppointment', function () {
 	it('adds appointment', function () {
 
 		// Chai.js assertions for enzyme
-		const handleToggle = sinon.stub();
-		const addApt = sinon.stub();
-		const addErrorMsg = sinon.stub();
+		const handleToggle = sinon.spy();
+		const addApt = sinon.spy();
+		const addErrorMsg = sinon.spy();
 
 		const wrapper = mount(
 			<AddAppointment
