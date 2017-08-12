@@ -1,6 +1,6 @@
 # Building an Interface with React
 This is the repository for the course, [Building an Interface with React](https://www.lynda.com/React-js-tutorials/Building-Web-Interface-React-js/495271-2.html).
-The code is converted from ES5 to ES6 and gulp is replaced with webpack.
+The code is converted from ES5 to ES6, gulp is replaced with webpack and all React components are tested.
 
 ## Instructions
 This repository has branches for each of the videos in the course. You can use the branch pop up menu in github to switch to a specific branch and take a look at the course at that stage. Or you can simply add `/tree/BRANCH_NAME` to the URL to go to the branch you want to peek at.
