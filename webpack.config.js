@@ -4,7 +4,8 @@ const webpack = require('webpack');
 
 module.exports = {
 
-	entry: path.resolve(__dirname, './src/js'),
+	// entry: path.resolve(__dirname, './src/js'),
+	entry: "./src/test-redux.js",
 
 	output: {
 		path: path.resolve(__dirname, './build/assets'),
