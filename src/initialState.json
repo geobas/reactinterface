@@ -1,5 +1,8 @@
 {
-	"allAppointments": [
+	"aptBodyVisible": "false",
+	"errorMsg": [],
+	"errorMsgVisible": "false",
+	"myAppointments": [
 		{
 			"petName": "Buffy",
 			"ownerName": "Hassum Harrod",
@@ -24,5 +27,8 @@
 			"aptDate": "2016-06-21 9:15",
 			"aptNotes": "Cat has excessive hairballs"
 		}
-	]
+	],
+	"orderBy":"petName",
+	"orderDir":"asc",
+	"queryText":""
 }

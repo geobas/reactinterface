@@ -8,12 +8,16 @@ const consoleMessages = store => next => action => {
 	let result
 
 	console.groupCollapsed(`dispatching action => ${action.type}`)
-	console.log(`total appointments before action "${action.type}" : `, store.getState().allAppointments.length)
+	console.log(`total appointments before action "${action.type}" : `, store.getState().myAppointments.length)
 	result = next(action)
 
-	let { allAppointments } = store.getState()
+	let { myAppointments } = store.getState()
 
-	allAppointments.forEach( (appointment) => {
+	console.log(`
+			aptBodyVisible: ${store.getState().aptBodyVisible}
+	`)
+
+	myAppointments.forEach( (appointment) => {
 		console.log(`
 			id: ${appointment.id}
 			petName: ${appointment.petName}
@@ -23,7 +27,7 @@ const consoleMessages = store => next => action => {
 		`)
 	})
 
-	console.log(`total appointments after action "${action.type}" : ${allAppointments.length}`)
+	console.log(`total appointments after action "${action.type}" : ${myAppointments.length}`)
 
 	console.groupEnd()
 

@@ -2,7 +2,20 @@ import C from '../constants'
 import { combineReducers } from 'redux'
 import _ from 'lodash'
 
-export const allAppointments = (state=[], action) => {
+export const aptBodyVisible = (state=[], action) => {
+
+	switch(action.type) {
+
+		case C.TOGGLE_ADD_FORM :
+
+			return action.payload;
+
+		default:
+			return state
+	}
+}
+
+export const myAppointments = (state=[], action) => {
 
 	switch(action.type) {
 
@@ -38,5 +51,6 @@ export const allAppointments = (state=[], action) => {
 }
 
 export default combineReducers({
-	allAppointments
+	aptBodyVisible,
+	myAppointments
 })

@@ -1,7 +1,11 @@
 import storeFactory from './store'
-import { addAppointment, removeAppointment, searchAppointment } from './actions'
+import { toggleAddForm, addAppointment, removeAppointment, searchAppointment } from './actions'
 
 const store = storeFactory()
+
+store.dispatch(
+	toggleAddForm(false)
+)
 
 store.dispatch(
 	addAppointment({
@@ -35,6 +39,11 @@ store.dispatch(
 
 store.dispatch(
 	searchAppointment("smith", "ownerName", "desc")
+)
+
+
+store.dispatch(
+	toggleAddForm(true)
 )
 
 store.dispatch(
