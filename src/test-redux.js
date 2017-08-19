@@ -1,10 +1,26 @@
 import storeFactory from './store'
-import { toggleAddForm, addAppointment, removeAppointment, searchAppointment } from './actions'
+import { toggleAddForm, addError, toggleErrorMessages, addAppointment, removeAppointment, searchAppointment, setOrderBy, setOrderDir, setQueryText } from './actions'
 
 const store = storeFactory()
 
 store.dispatch(
-	toggleAddForm(false)
+	toggleAddForm()
+)
+
+store.dispatch(
+	toggleErrorMessages()
+)
+
+store.dispatch(
+	addError({ petName : 'Pet name is too short...' })
+)
+
+store.dispatch(
+	addError({ inputAptDate : 'Date was not given...' })
+)
+
+store.dispatch(
+	toggleErrorMessages(true)
 )
 
 store.dispatch(
@@ -28,6 +44,10 @@ store.dispatch(
 )
 
 store.dispatch(
+	setOrderBy("ownerName")
+)
+
+store.dispatch(
 	addAppointment({
 			"id": "3",
 			"petName": "Goldie",
@@ -38,12 +58,7 @@ store.dispatch(
 )
 
 store.dispatch(
-	searchAppointment("smith", "ownerName", "desc")
-)
-
-
-store.dispatch(
-	toggleAddForm(true)
+	searchAppointment("constance", "petName", "desc")
 )
 
 store.dispatch(

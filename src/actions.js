@@ -12,13 +12,13 @@ export const addError = error =>
 		payload: error
 	})
 
-export const removeError = error =>
-	({
-		type: C.REMOVE_ERROR,
-		payload: error
-	})
+// export const removeError = error =>
+// 	({
+// 		type: C.REMOVE_ERROR,
+// 		payload: error
+// 	})
 
-export const toggleErrorMessages = flag =>
+export const toggleErrorMessages = (flag=false) =>
 	({
 		type: C.TOGGLE_ERROR_MESSAGES,
 		payload: flag
@@ -42,19 +42,24 @@ export const searchAppointment = (queryText, orderBy, orderDir) =>
 		payload: { queryText, orderBy, orderDir }
 	})
 
-export const setOrderBy = order =>
+// export const searchAppointment = () =>
+// 	({
+// 		type: C.SEARCH_APPOINTMENT,
+// 	})
+
+export const setOrderBy = (order='petName') =>
 	({
 		type: C.SET_ORDER_BY,
 		payload: order
 	})
 
-export const setOrderDir = order =>
+export const setOrderDir = (order='asc') =>
 	({
 		type: C.SET_ORDER_DIR,
 		payload: order
 	})
 
-export const setQueryText = queryText =>
+export const setQueryText = (queryText='') =>
 	({
 		type: C.SET_QUERY_TEXT,
 		payload: queryText
