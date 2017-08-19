@@ -17,8 +17,8 @@ export default class ErrorMessage extends Component {
 		this.displayErrors = { display };
 	}
 
-    showErrors(error, i) {
-    	return <p className="error" key={i}>{ Object.keys(error).map(k => error[k]) }</p>;
+    showErrors(errors, i) {
+    	return errors.map( (error,i) => <p className="error" key={ i }>{ error }</p>)
     }
 
 	render() {

@@ -7,18 +7,14 @@ import ErrorMessage from './ErrorMessage';
 import AddAppointment from './AddAppointment';
 import SearchAppointments from './SearchAppointments';
 
-export default class MainInterface extends Component {
+import { connect } from 'react-redux';
+import { fetchAppointments, toggleAddForm, addAppointment, addError,
+		 toggleErrorMessages, clearErrors, setOrderBy, setOrderDir,
+		 setQueryText, removeAppointment } from '../actions';
+
+class MainInterface extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			aptBodyVisible: false,
-			orderBy: 'petName',
-			orderDir: 'asc',
-			queryText: '',
-			myAppointments: [],
-			errorMsg: [],
-			errorMsgVisible: false
-		};
 		this.deleteMessage = this.deleteMessage.bind(this);
 		this.toggleAddDisplay = this.toggleAddDisplay.bind(this);
 		this.addItem = this.addItem.bind(this);
@@ -29,7 +25,7 @@ export default class MainInterface extends Component {
 	}
 
 	componentDidMount() {
-		this.serverRequest = $.get('./assets/data.json', result => this.setState( { myAppointments: result } ));
+		this.serverRequest = this.props.fetchAppointments('./assets/data.json');
 	}
 
 	componentWillUnmount() {
@@ -37,37 +33,35 @@ export default class MainInterface extends Component {
 	}
 
 	deleteMessage(item) {
-		let newApts = _.without(this.state.myAppointments, item);
-		this.setState({ myAppointments: newApts });
+		this.props.removeAppointment(item.id);
 	}
 
 	toggleAddDisplay() {
-		let tempVisibility = !this.state.aptBodyVisible;
-		this.setState({ aptBodyVisible: tempVisibility });
+		this.props.toggleAddDisplay(!this.props.aptBodyVisible);
 	}
 
 	addItem(tempItem) {
-		let tempApts = this.state.myAppointments;
-		tempApts.push(tempItem);
-		this.setState({ myAppointments: tempApts });
+		this.props.addItem(tempItem);
 	}
 
 	addError(errorItems, visible) {
-		this.setState({ errorMsg: errorItems });
-		this.setState({ errorMsgVisible: visible });
+		this.props.clearErrors();
+		this.props.addError(errorItems);
+		this.props.toggleErrorMessages(visible);
 	}
 
 	reOrder(orderBy, orderDir) {
-		this.setState({ orderBy, orderDir });
+		this.props.setOrderBy(orderBy);
+		this.props.setOrderDir(orderDir);
 	}
 
 	setQueryText(q) {
-		this.setState({ queryText: q });
+		this.props.setQueryText(q);
 	}
 
 	showAppointments() {
-		let myAppointments = this.state.myAppointments;
-		let queryText = this.state.queryText;
+		let myAppointments = this.props.myAppointments;
+		let queryText = this.props.queryText;
 		let filteredApts = [];
 
 		myAppointments.forEach( item => {
@@ -79,7 +73,7 @@ export default class MainInterface extends Component {
 			) { filteredApts.push(item); }
 		} );
 
-		filteredApts = _.orderBy(filteredApts, item => item[this.state.orderBy].toLowerCase(), this.state.orderDir);
+		filteredApts = _.orderBy(filteredApts, item => item[this.props.orderBy].toLowerCase(), this.props.orderDir);
 
 		filteredApts = filteredApts.map( (item, index) => {
 			return (
@@ -99,18 +93,18 @@ export default class MainInterface extends Component {
 		return (
 			<div className="interface">
 				<ErrorMessage
-					errors = { this.state.errorMsg }
-					errorsVisible = { this.state.errorMsgVisible }
+					errors = { this.props.errorMsg }
+					errorsVisible = { this.props.errorMsgVisible }
 				/>
 				<AddAppointment
-					bodyVisible = { this.state.aptBodyVisible }
+					bodyVisible = { this.props.aptBodyVisible }
 					handleToggle = { this.toggleAddDisplay }
 					addApt = { this.addItem }
 					addErrorMsg = { this.addError }
 				/>
 				<SearchAppointments
-					orderBy = { this.state.orderBy }
-					orderDir = { this.state.orderDir }
+					orderBy = { this.props.orderBy }
+					orderDir = { this.props.orderDir }
 					onReOrder = { this.reOrder }
 					onSearch = { this.setQueryText }
 				/>
@@ -120,3 +114,30 @@ export default class MainInterface extends Component {
 	}
 
 }
+
+const mapStateToProps = (state) =>
+	({
+		aptBodyVisible: state.aptBodyVisible,
+		errorMsg: state.errorMsg,
+		errorMsgVisible: state.errorMsgVisible,
+		myAppointments: state.myAppointments,
+		orderBy: state.orderBy,
+		orderDir: state.orderDir,
+		queryText: state.queryText
+	})
+
+const mapDispatchToProps = (dispatch) =>
+	({
+		fetchAppointments: (url) => dispatch(fetchAppointments(url)),
+		toggleAddDisplay: (flag) => dispatch(toggleAddForm(flag)),
+		addItem: (item) => dispatch(addAppointment(item)),
+		addError: (errorItems) => dispatch(addError(errorItems)),
+		toggleErrorMessages: (visible) => dispatch(toggleErrorMessages(visible)),
+		clearErrors: () => dispatch(clearErrors()),
+		setOrderBy: (orderBy) => dispatch(setOrderBy(orderBy)),
+		setOrderDir: (orderDir) => dispatch(setOrderDir(orderDir)),
+		setQueryText: (qt) => dispatch(setQueryText(qt)),
+		removeAppointment: (id) => dispatch(removeAppointment(id))
+	})
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainInterface);

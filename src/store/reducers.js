@@ -23,9 +23,9 @@ export const errorMsg = (state=[], action) => {
 
 			return [...state, action.payload]
 
-		// case C.REMOVE_ERROR :
+		case C.CLEAR_ERRORS :
 
-		// 	return action.payload;
+			return []
 
 		default:
 			return state
@@ -49,6 +49,10 @@ export const myAppointments = (state=[], action) => {
 
 	switch(action.type) {
 
+		case C.FETCH_APPOINTMENTS_SUCCESS :
+
+			return action.payload
+
 		case C.ADD_APPOINTMENT :
 
 			return [...state, action.payload]
@@ -70,8 +74,9 @@ export const myAppointments = (state=[], action) => {
 				) { filteredApts.push(appointment); }
 			} );
 
-			filteredApts = _.orderBy(filteredApts, appointment => appointment[orderBy(null, { type: C.SET_ORDER_BY, payload: action.payload.orderBy })].toLowerCase(), 
-																	orderDir(null, { type: C.SET_ORDER_DIR, payload: action.payload.orderDir }));
+			filteredApts = _.orderBy(filteredApts, appointment =>
+				appointment[orderBy(null, { type: C.SET_ORDER_BY, payload: action.payload.orderBy })].toLowerCase(),
+				orderDir(null, { type: C.SET_ORDER_DIR, payload: action.payload.orderDir }));
 			return filteredApts;
 
 		default:
@@ -90,7 +95,7 @@ export const orderBy = (state=[], action) => {
 		default:
 			return state
 	}
-}	
+}
 
 export const orderDir = (state=[], action) => {
 

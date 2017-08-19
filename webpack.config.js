@@ -4,8 +4,8 @@ const webpack = require('webpack');
 
 module.exports = {
 
-	// entry: path.resolve(__dirname, './src/js'),
-	entry: "./src/test-redux.js",
+	entry: path.resolve(__dirname, './src/js'),
+	// entry: "./src/test-redux.js",
 
 	output: {
 		path: path.resolve(__dirname, './build/assets'),
@@ -42,7 +42,7 @@ module.exports = {
 			//     test: /\.json$/,
 			//     exclude: /(node_modules)/,
 			//     loader: 'json-loader'
-			// },
+			// }
 		]
 	},
 

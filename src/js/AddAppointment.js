@@ -26,16 +26,16 @@ export default class AddAppointment extends Component {
 		let errorMsg = [];
 
 		const petName = this.refs.inputPetName.value;
-		if ( petName.length < 5 ) errorMsg.push({ petName : 'Pet name is too short...' });
+		if ( petName.length < 5 ) errorMsg.push('Pet name is too short...');
 
 		const ownerName = this.refs.inputOwnerName.value;
-		if ( ownerName.length < 5 ) errorMsg.push({ ownerName : 'Owner name is too short...' });
+		if ( ownerName.length < 5 ) errorMsg.push('Owner name is too short...');
 
 		const aptDate = this.refs.inputAptDate.value;
-		if ( !aptDate ) errorMsg.push({ inputAptDate : 'Date was not given...' });
+		if ( !aptDate ) errorMsg.push('Date was not given...');
 
 		const aptTime = this.refs.inputAptTime.value;
-		if ( !aptTime ) errorMsg.push({ aptTime : 'Time was not given...' });
+		if ( !aptTime ) errorMsg.push('Time was not given...');
 
 		if ( errorMsg.length > 0) {
 			this.props.addErrorMsg(errorMsg, true);

@@ -1,0 +1,9 @@
+{
+	"aptBodyVisible": false,
+	"errorMsg": [],
+	"errorMsgVisible": false,
+	"myAppointments": [],
+	"orderBy": "petName",
+	"orderDir": "asc",
+	"queryText": ""
+}

@@ -12,17 +12,37 @@ export const addError = error =>
 		payload: error
 	})
 
-// export const removeError = error =>
-// 	({
-// 		type: C.REMOVE_ERROR,
-// 		payload: error
-// 	})
+export const clearErrors = () =>
+	({
+		type: C.CLEAR_ERRORS
+	})
 
 export const toggleErrorMessages = (flag=false) =>
 	({
 		type: C.TOGGLE_ERROR_MESSAGES,
 		payload: flag
 	})
+
+export const fetchAppointmentsSuccess = appointments =>
+	({
+		type: C.FETCH_APPOINTMENTS_SUCCESS,
+		payload: appointments
+	})
+
+export const fetchAppointments = url => {
+	return (dispatch) => {
+		fetch(url)
+			.then((response) => {
+				if (!response.ok) {
+					throw Error(`${response.status} URL ${response.statusText}`);
+				}
+
+				return response;
+			})
+			.then((response) => response.json())
+			.then((appointments) => dispatch(fetchAppointmentsSuccess(appointments)))		
+	}
+}
 
 export const addAppointment = appointment =>
 	({
